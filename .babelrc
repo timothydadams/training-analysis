@@ -1,0 +1,9 @@
+{
+    "presets": ["@babel/preset-env","@babel/preset-react"],
+    "plugins": [
+        "babel-plugin-twin",
+        "@babel/plugin-transform-runtime", 
+        "babel-plugin-macros",
+        "babel-plugin-styled-components"
+    ]
+}

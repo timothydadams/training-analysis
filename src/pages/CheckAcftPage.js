@@ -30,6 +30,8 @@ export const AcftPage = () => {
     useEffect(() => {
         if (showSuccessMessage || showErrorMessage) {
             setTimeout(() => {
+                setShowErrorMessage(false);
+                setShowErrorMessage(false);
                 setResponse(null);
             }, 3000);
         }
@@ -76,11 +78,11 @@ export const AcftPage = () => {
     
 
     return (
-        <div tw="flex flex-col h-screen">
+        <div className="flex flex-col h-screen">
             <div className="max-w-md w-full m-auto bg-indigo-100 rounded-md p-5">   
                 <ApiCheck />
 
-            <p tw="font-bold mb-2">Check Your ACFT Score</p>
+            <p className="text-center text-xl font-bold mb-2">Check Your ACFT Score</p>
             {response && <div >{JSON.stringify(response.data)}</div>}
 
             <label className="block mb-2 text-black" htmlFor="email">3-Rep Max Deadlift (MDL)</label>
@@ -152,7 +154,7 @@ export const AcftPage = () => {
                     ((!ltk && plk) || (ltk && !plk))
                 }
                 onClick={onCheckScore}
-                tw="w-full bg-indigo-600 disabled:opacity-50 hover:bg-indigo-700 text-white font-bold py-2 px-4 mb-6 rounded"
+                className="w-full bg-indigo-600 disabled:opacity-50 hover:bg-indigo-700 text-white font-bold py-2 px-4 mb-6 rounded"
                 >
                     Check Score
                     </button>
@@ -161,14 +163,14 @@ export const AcftPage = () => {
 
                     <button 
                 onClick={resetValues}
-                tw="w-full bg-indigo-300 hover:bg-indigo-500 text-white font-bold py-2 px-4 mb-6 rounded"
+                className="w-full bg-indigo-300 hover:bg-indigo-500 text-white font-bold py-2 px-4 mb-6 rounded"
                 >
                     Reset Values
                     </button>
             
             <button 
                 onClick={onLogOut}
-                tw="w-full bg-indigo-300 hover:bg-indigo-500 text-white font-bold py-2 px-4 mb-6 rounded"
+                className="w-full bg-indigo-300 hover:bg-indigo-500 text-white font-bold py-2 px-4 mb-6 rounded"
                 >
                     Log Out
                     </button>

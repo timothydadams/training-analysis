@@ -3,16 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { useToken } from '../auth/useToken';
 import { useUser } from '../auth/useUser';
 import axios from 'axios';
-
+//import 'twin.macro';
 
 export const UserInfoPage = () => {
     const user = useUser();
     const [token, setToken] = useToken();
 
-    const { id, email, info } = user;
+    const { id, email, info, isVerified } = user;
 
-    // We'll use the history to navigate the user
-    // programmatically later on (we're not using it yet)
     const navigate = useNavigate();
 
     // These states are bound to the values of the text inputs
@@ -76,32 +74,75 @@ export const UserInfoPage = () => {
     
     // And here we have the JSX for our component. It's pretty straightforward
     return (
-        <div className="content-container">
-            <h1>Info for {email}</h1>
-            {showSuccessMessage && <div className="success">Successfully saved user data!</div>}
-            {showErrorMessage && <div className="fail">Uh oh... something went wrong and we couldn't save changes</div>}
-            <label>
-                Favorite Food:
-                <input
-                    onChange={e => setFavoriteFood(e.target.value)}
-                    value={favoriteFood} />
-            </label>
-            <label>
-                Hair Color:
-                <input
-                    onChange={e => setHairColor(e.target.value)}
-                    value={hairColor} />
-            </label>
-            <label>
-                Bio:
-                <input
-                    onChange={e => setBio(e.target.value)}
-                    value={bio} />
-            </label>
-            <hr />
-            <button onClick={saveChanges}>Save Changes</button>
-            <button onClick={resetValues}>Reset Values</button>
-            <button onClick={logOut}>Log Out</button>
+        <div className="flex flex-col h-screen">
+            <div className="max-w-xs w-full m-auto bg-indigo-100 rounded-md p-5">
+                <h1 className="text-center text-xl font-bold mb-2">
+                    Update User Information
+                </h1>
+                {!isVerified && <div className="mb-4 w-full bg-red-400 p-2">You won't be able to change any data until you verify your email.</div>}
+                {showSuccessMessage && <div className="mb-4 w-full bg-green-400 p-2">Successfully saved user data!</div>}
+                {showErrorMessage && <div className="mb-4 w-full bg-red-400 p-2">Uh oh... something went wrong and we couldn't save changes</div>}
+
+
+                <label className="block mb-2 text-black" htmlFor="favoriteFood">Favorite Food</label>
+                <input className="w-full p-2 mb-6 text-black border-b-2 border-black outline-none bg-indigo-100"
+                    type="text"
+                    name="favoriteFood"
+                    value={favoriteFood} 
+                    placeholder="steak"
+                    onChange={e => setFavoriteFood(e.target.value)} />
+
+
+                <label className="block mb-2 text-black" htmlFor="hairColor">Hair Color</label>
+                <input className="w-full p-2 mb-6 text-black border-b-2 border-black outline-none bg-indigo-100"
+                    type="text"
+                    name="hairColor"
+                    value={hairColor} 
+                    placeholder="brown"
+                    onChange={e => setHairColor(e.target.value)} />
+
+
+                <label className="block mb-2 text-black" htmlFor="bio">Bio</label>
+                <input className="w-full p-2 mb-6 text-black border-b-2 border-black outline-none bg-indigo-100"
+                    type="text"
+                    name="bio"
+                    value={bio} 
+                    placeholder="keep it short and sweet"
+                    onChange={e => setBio(e.target.value)} />
+
+                <hr />
+
+                <div>   
+                    <button  
+                        disabled={isVerified}
+                        onClick={saveChanges} 
+                        className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 mb-6 rounded" 
+                    >
+                    Save Changes
+                    </button>       
+                </div> 
+                <div>   
+                    <button
+                        className="text-indigo-800 hover:text-black text-sm float-left duration-300" 
+                        onClick={resetValues}
+                    >
+                        Reset Values
+                    </button>   
+                </div> 
+
+                <div>   
+                    <button
+                        className="text-indigo-800 hover:text-black text-sm float-right duration-300" 
+                        onClick={logOut}
+                    >
+                        Log Out
+                    </button>   
+                </div> 
+                
+
+            </div> 
         </div>
+
+
     );
 }

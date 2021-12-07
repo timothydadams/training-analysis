@@ -13,9 +13,7 @@ export const signupRoute = {
         const user = await db.collection('users').findOne({email});
 
         //check if user exists
-        if (user) {
-            res.sendStatus(409);
-        }
+        if (user) return res.sendStatus(409);
 
         //encrypt the pw
         const passwordHash = await bcrypt.hash(password, 10);
@@ -52,7 +50,7 @@ export const signupRoute = {
             console.log(e);
             res.sendStatus(500);
         }
-        //jwt(1,2,3)
+        //jwt.sign(1,2,3,4)
         //1: data to include in web token
         //2: token secret (.env)
         //3: config option (expiresIn)

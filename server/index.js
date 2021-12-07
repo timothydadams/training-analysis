@@ -12,6 +12,7 @@ app.use(express.json());
 
 app.use(express.static('dist'));
 
+//app.use(authMiddleWare);
 // Add all the routes to our Express server
 // exported from routes/index.js
 routes.forEach(route => {

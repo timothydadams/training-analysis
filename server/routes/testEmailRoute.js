@@ -10,7 +10,7 @@ export const testEmailRoute = {
                 from:'adams.timothy.d@gmail.com',
                 subject:'Can you hear me now?',
                 text:'hopefully...',
-            })
+            });
             res.sendStatus(200);
         } catch (e) {
             console.log(e);

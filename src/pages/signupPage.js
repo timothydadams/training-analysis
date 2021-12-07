@@ -4,7 +4,7 @@ import { useToken } from '../auth/useToken';
 import Button from '../components/Buttons';
 import axios from 'axios';
 import { ApiCheck } from '../components/ApiCheck';
-import tw from 'twin.macro';
+//import tw from 'twin.macro';
 
 export const SignupPage = () => {
     const [token, setToken] = useToken();
@@ -24,15 +24,15 @@ export const SignupPage = () => {
 
         const {token} = response.data;
         setToken(token);
-        navigate('/');
+        navigate('/please-verify');
     }
 
     return (
-        <div tw="flex flex-col h-screen">
+        <div className="flex flex-col h-screen">
             <div className="max-w-xs w-full m-auto bg-indigo-100 rounded-md p-5">   
                 <ApiCheck />
 
-            <p tw="font-bold mb-2">Create A New Account</p>
+            <p className="text-center text-xl font-bold mb-2">Create A New Account</p>
             {errorMsg && <div className="fail">{errorMsg}</div>}
 
             <label className="block mb-2 text-black" htmlFor="email">Email</label>
@@ -68,14 +68,14 @@ export const SignupPage = () => {
                     password !== confirmPassword
                 }
                 onClick={onSignUpClicked}
-                tw="w-full bg-indigo-600 disabled:opacity-50 hover:bg-indigo-700 text-white font-bold py-2 px-4 mb-6 rounded"
+                className="w-full bg-indigo-600 disabled:opacity-50 hover:bg-indigo-700 text-white font-bold py-2 px-4 mb-6 rounded"
                 >
                     Sign Up!
                     </button>
             
             <button 
                 onClick={() => navigate('/login')} 
-                tw="text-indigo-800 hover:text-black text-sm float-left duration-300"
+                className="text-indigo-800 hover:text-black text-sm float-left duration-300"
                 >
                     I already have an account
                 </button>

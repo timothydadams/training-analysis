@@ -11,6 +11,8 @@ module.exports = {
       colors: {
         sky: colors.sky,
         cyan: colors.cyan,
+        electric: "#db00ff",
+        ribbon: "#0047ff",
       }
     },
   },

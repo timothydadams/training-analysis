@@ -1,12 +1,12 @@
 import React from 'react';
 import { AppRoutes } from './Routes';
-import bg from './assets/peaks.svg';
-
+//import bg from './assets/peaks.svg';
+//style={{ backgroundImage: `url(${bg})` }}
 
 export const App = () => {
     return (
-        <div className="h-screen bg-gradient-to-b from-sky-400 to-cyan-900"> 
-            <div className="bg-cover" style={{ backgroundImage: `url(${bg})` }}>
+        <div className="h-screen bg-gradient-to-b from-electric to-ribbon"> 
+            <div className="bg-cover" >
         
              
           

@@ -93,7 +93,7 @@ module.exports = (env, argv) => {
       maxAssetSize: 512000,
     };
     
-  }
+  } 
 
   return config;
 

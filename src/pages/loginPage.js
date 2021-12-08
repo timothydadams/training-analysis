@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useToken } from '../auth/useToken';
-//import Button from '../components/Buttons';
 import axios from 'axios';
 import { ApiCheck } from '../components/ApiCheck';
-//import tw from 'twin.macro';
 
 export const LoginPage = () => {
     const [token, setToken] = useToken();
@@ -14,6 +12,8 @@ export const LoginPage = () => {
 
     const navigate = useNavigate();
 
+    const {state} = useLocation();
+
     const onLoginClicked = async () => {
         const response = await axios.post('/api/login', {
             email,
@@ -21,7 +21,7 @@ export const LoginPage = () => {
         });
         const {token} = response.data;
         setToken(token);
-        navigate('/');
+        navigate(state.path || '/dashboard');
     }
 
     const btnClass = "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mt-1 mb-1";
@@ -33,7 +33,7 @@ export const LoginPage = () => {
         {/*<header>
              <img className="w-20 mx-auto mb-5" src="https://img.icons8.com/fluent/344/year-of-tiger.png" /> 
         </header>*/}
-      
+
         {errorMsg && <div className="fail">{errorMsg}</div>}
         <p className="text-center text-xl font-bold mb-2">Please Sign In</p>
             <div>

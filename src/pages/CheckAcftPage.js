@@ -67,13 +67,13 @@ export const AcftPage = () => {
     };
     
     const resetValues = () => {
-        setMdl = useState('');
-        setSpt = useState('');
-        setHrp = useState('');
-        setLtk = useState('');
-        setSdc = useState('');
-        setPlk = useState('');
-        setRun = useState('');
+        setMdl('');
+        setSpt('');
+        setHrp('');
+        setLtk('');
+        setSdc('');
+        setPlk('');
+        setRun('');
     };
     
 

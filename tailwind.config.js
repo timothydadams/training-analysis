@@ -1,19 +1,23 @@
 const colors = require('tailwindcss/colors');
 
 module.exports = {
-  purge: [],
+  purge: {
+    enabled: true,
+    content: ['./client/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  },
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       colors: {
         sky: colors.sky,
         cyan: colors.cyan,
+        electric: "#db00ff",
+        ribbon: "#0047ff",
       }
     },
   },
   variants: {
-    backgroundColor: ['responsive', 'hover', 'focus', 'active', 'disabled'],
-    textColor: ['responsive', 'hover', 'focus', 'active', 'disabled'],
+    opacity: ({ after }) => after(['disabled'])
   },
   plugins: [],
 }

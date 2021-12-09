@@ -30,6 +30,8 @@ export const AcftPage = () => {
     useEffect(() => {
         if (showSuccessMessage || showErrorMessage) {
             setTimeout(() => {
+                setShowSuccessMessage(false);
+                setShowErrorMessage(false);
                 setResponse(null);
             }, 3000);
         }
@@ -41,9 +43,9 @@ export const AcftPage = () => {
                 mdl:parseInt(mdl),
                 spt:parseFloat(spt),
                 hrp:parseInt(hrp),
-                ltk:parseInt(ltk),
+                ...(ltk && {ltk:parseInt(ltk)}),
                 sdc:`0:${sdc}`,
-                plk:`0:${plk}`,
+                ...(plk && {plk:`0:${plk}`}),
                 run:`0:${run}`,
             }, {
                 headers: { Authorization: `Bearer ${token}`}
@@ -65,22 +67,22 @@ export const AcftPage = () => {
     };
     
     const resetValues = () => {
-        setMdl = useState('');
-        setSpt = useState('');
-        setHrp = useState('');
-        setLtk = useState('');
-        setSdc = useState('');
-        setPlk = useState('');
-        setRun = useState('');
+        setMdl('');
+        setSpt('');
+        setHrp('');
+        setLtk('');
+        setSdc('');
+        setPlk('');
+        setRun('');
     };
     
 
     return (
-        <div tw="flex flex-col h-screen">
+        <div className="flex flex-col h-screen">
             <div className="max-w-md w-full m-auto bg-indigo-100 rounded-md p-5">   
                 <ApiCheck />
 
-            <p tw="font-bold mb-2">Check Your ACFT Score</p>
+            <p className="text-center text-xl font-bold mb-2">Check Your ACFT Score</p>
             {response && <div >{JSON.stringify(response.data)}</div>}
 
             <label className="block mb-2 text-black" htmlFor="email">3-Rep Max Deadlift (MDL)</label>
@@ -148,30 +150,32 @@ export const AcftPage = () => {
 
             <button 
                 disabled={
-                    !mdl || !spt || !hrp || !sdc || !run ||
-                    ((!ltk && plk) || (ltk && !plk))
+                    !mdl || !spt || !hrp || 
+                    (!run || (run && !run.includes(':'))) || 
+                    (!sdc || (sdc && !sdc.includes(':'))) ||
+                    !((!plk && ltk) || (!ltk && plk && plk.includes(':')))
                 }
                 onClick={onCheckScore}
-                tw="w-full bg-indigo-600 disabled:opacity-50 hover:bg-indigo-700 text-white font-bold py-2 px-4 mb-6 rounded"
+                className="w-full bg-indigo-600 disabled:opacity-50 hover:bg-indigo-700 text-white font-bold py-2 px-4 mb-6 rounded"
                 >
                     Check Score
-                    </button>
+            </button>
 
 
 
-                    <button 
+            <button 
                 onClick={resetValues}
-                tw="w-full bg-indigo-300 hover:bg-indigo-500 text-white font-bold py-2 px-4 mb-6 rounded"
+                className="w-full bg-indigo-300 hover:bg-indigo-500 text-white font-bold py-2 px-4 mb-6 rounded"
                 >
                     Reset Values
-                    </button>
+            </button>
             
             <button 
                 onClick={onLogOut}
-                tw="w-full bg-indigo-300 hover:bg-indigo-500 text-white font-bold py-2 px-4 mb-6 rounded"
+                className="w-full bg-indigo-300 hover:bg-indigo-500 text-white font-bold py-2 px-4 mb-6 rounded"
                 >
                     Log Out
-                    </button>
+            </button>
 
 
 

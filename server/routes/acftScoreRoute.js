@@ -1,3 +1,4 @@
+//import db from '../../db/postgresConnection';
 
 import {
     maxDeadLift,
@@ -17,6 +18,9 @@ export const scoreRoute = {
     path:'/api/score',
     method:'post',
     handler: async (req, res) => {
+        //const {rows} = await db.query('SELECT * from acft WHERE points = 100');
+        //console.log(rows);
+        
 
         let n = Object.values(req.body).join('-');
         n = n.replace(/:/g, '');
@@ -44,7 +48,7 @@ export const scoreRoute = {
             result.mdl = findScore({str:'maxDeadLift', value: mdl, increment: 1});
             result.spt = findScore({str:'standingPowerThrow', value:spt, increment: .1 });
             result.hrp = findScore({str:'hrPushups',value:hrp, increment: 1 });
-            result.ltk = findScore({str:'legTuck', value:ltk, increment: 1});
+            
 
 
             const getTimeScore = ({name, val}) => {
@@ -84,8 +88,11 @@ export const scoreRoute = {
                 return {score, outcome};
             };
             
-            result.sdc = getTimeScore({name:'sprintDragCarry', val:sdc});
-            result.plk = getTimeScore({name:'plank', val:plk });
+            ltk
+            ? result.ltk = findScore({str:'legTuck', value:ltk, increment: 1}) 
+            : result.plk = getTimeScore({name:'plank', val:plk });
+            
+            result.sdc = getTimeScore({name:'sprintDragCarry', val:sdc})
             result.run = getTimeScore({name:'twoMileRun', val:run});
 
             let total = 0;
@@ -110,6 +117,7 @@ export const scoreRoute = {
             console.log('Fetching from cache');
             res.status(200).json(cache[n]);
         } else {
+            if (req.body.ltk && req.body.plk) return res.sendStatus(400);
             console.log('Calculating ACFT Score', JSON.stringify(req.body));
             try {
                 const result = generateScore(req.body);

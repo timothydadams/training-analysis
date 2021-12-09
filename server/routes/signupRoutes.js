@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import {v4 as uuid} from 'uuid';
 import { sendEmail } from '../util/sendEmail';
 
-export const signupRoute = {
+const signupRoute = {
     path:'/api/signup',
     method:'post',
     handler: async (req, res) => {
@@ -13,9 +13,7 @@ export const signupRoute = {
         const user = await db.collection('users').findOne({email});
 
         //check if user exists
-        if (user) {
-            res.sendStatus(409);
-        }
+        if (user) return res.sendStatus(409);
 
         //encrypt the pw
         const passwordHash = await bcrypt.hash(password, 10);
@@ -52,7 +50,7 @@ export const signupRoute = {
             console.log(e);
             res.sendStatus(500);
         }
-        //jwt(1,2,3)
+        //jwt.sign(1,2,3,4)
         //1: data to include in web token
         //2: token secret (.env)
         //3: config option (expiresIn)
@@ -74,4 +72,8 @@ export const signupRoute = {
             res.status(200).json({token});
         })
     }
+}
+
+module.exports ={
+    signupRoute,
 }

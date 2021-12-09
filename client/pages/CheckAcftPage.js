@@ -30,7 +30,7 @@ export const AcftPage = () => {
     useEffect(() => {
         if (showSuccessMessage || showErrorMessage) {
             setTimeout(() => {
-                setShowErrorMessage(false);
+                setShowSuccessMessage(false);
                 setShowErrorMessage(false);
                 setResponse(null);
             }, 3000);
@@ -43,9 +43,9 @@ export const AcftPage = () => {
                 mdl:parseInt(mdl),
                 spt:parseFloat(spt),
                 hrp:parseInt(hrp),
-                ltk:parseInt(ltk),
+                ...(ltk && {ltk:parseInt(ltk)}),
                 sdc:`0:${sdc}`,
-                plk:`0:${plk}`,
+                ...(plk && {plk:`0:${plk}`}),
                 run:`0:${run}`,
             }, {
                 headers: { Authorization: `Bearer ${token}`}
@@ -150,30 +150,32 @@ export const AcftPage = () => {
 
             <button 
                 disabled={
-                    !mdl || !spt || !hrp || !sdc || !run ||
-                    ((!ltk && plk) || (ltk && !plk))
+                    !mdl || !spt || !hrp || 
+                    (!run || (run && !run.includes(':'))) || 
+                    (!sdc || (sdc && !sdc.includes(':'))) ||
+                    !((!plk && ltk) || (!ltk && plk && plk.includes(':')))
                 }
                 onClick={onCheckScore}
                 className="w-full bg-indigo-600 disabled:opacity-50 hover:bg-indigo-700 text-white font-bold py-2 px-4 mb-6 rounded"
                 >
                     Check Score
-                    </button>
+            </button>
 
 
 
-                    <button 
+            <button 
                 onClick={resetValues}
                 className="w-full bg-indigo-300 hover:bg-indigo-500 text-white font-bold py-2 px-4 mb-6 rounded"
                 >
                     Reset Values
-                    </button>
+            </button>
             
             <button 
                 onClick={onLogOut}
                 className="w-full bg-indigo-300 hover:bg-indigo-500 text-white font-bold py-2 px-4 mb-6 rounded"
                 >
                     Log Out
-                    </button>
+            </button>
 
 
 

@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import {v4 as uuid} from 'uuid';
 import { sendEmail } from '../util/sendEmail';
 
-export const signupRoute = {
+const signupRoute = {
     path:'/api/signup',
     method:'post',
     handler: async (req, res) => {
@@ -72,4 +72,8 @@ export const signupRoute = {
             res.status(200).json({token});
         })
     }
+}
+
+module.exports ={
+    signupRoute,
 }

@@ -9,7 +9,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 module.exports = (env, argv) => {
   let config = {};
 
-  config.entry = path.resolve(__dirname, 'src', 'index.js');
+  config.entry = path.resolve(__dirname, 'client', 'index.js');
   config.devtool = argv.mode === 'production' ? false : "inline-source-map",
   config.watch = argv.mode === 'development' ? true : false,
   config.output = {
@@ -26,7 +26,7 @@ module.exports = (env, argv) => {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, 'src', 'assets'),
+          from: path.resolve(__dirname, 'client', 'assets'),
           to: path.resolve(__dirname, 'dist', 'assets'),
           noErrorOnMissing:true,
           globOptions: {
@@ -93,7 +93,7 @@ module.exports = (env, argv) => {
       maxAssetSize: 512000,
     };
     
-  } 
+  }
 
   return config;
 

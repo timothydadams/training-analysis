@@ -21,7 +21,7 @@ export const LoginPage = () => {
         });
         const {token} = response.data;
         setToken(token);
-        navigate(state.path || '/dashboard');
+        navigate(state ? state.path : '/');
     }
 
     const btnClass = "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mt-1 mb-1";

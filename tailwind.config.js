@@ -3,7 +3,7 @@ const colors = require('tailwindcss/colors');
 module.exports = {
   purge: {
     enabled: true,
-    content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+    content: ['./client/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
@@ -17,8 +17,7 @@ module.exports = {
     },
   },
   variants: {
-    backgroundColor: ['responsive', 'hover', 'focus', 'active', 'disabled'],
-    textColor: ['responsive', 'hover', 'focus', 'active', 'disabled'],
+    opacity: ({ after }) => after(['disabled'])
   },
   plugins: [],
 }

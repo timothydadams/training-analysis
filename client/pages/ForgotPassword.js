@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { ApiCheck } from '../components/ApiCheck';
+import { InputField, BigButton, SmallTextButton } from '../components/FormComponents';
+import { Title, LoginContainer, Message } from '../components/LoginComponents';
+
 
 export const ForgotPasswordPage = () => {
     const [errorMsg, setErrorMsg] = useState('');
@@ -14,7 +17,7 @@ export const ForgotPasswordPage = () => {
         try {
             await axios.put(`/api/forgot-password/${email}`);
             setSuccess(true);
-            setTimeout(()=>navigate('/login'), 3000);
+            setTimeout(()=>navigate('/login'), 4000);
         } catch(e){
             setErrorMsg(e.message);
         }
@@ -22,51 +25,38 @@ export const ForgotPasswordPage = () => {
 
 
     return (
-    <div className="flex flex-col h-screen">
-        <div className="max-w-lg w-full m-auto bg-indigo-100 rounded-md p-5">   
+        <LoginContainer>
+
             <ApiCheck />
+            
             {success ? (
-            <div>
-                <p className="text-center font-bold mb-2 text-green-600">Success!</p>
-                <p>Check your email for a link to reset your password.</p>
-            </div>
-        ):(
-            <div>
-                {errorMsg && <p className="text-red-400">{errorMsg}</p>}
-                <p className="mb-4">Enter your email and we'll send you a link.</p>
+                <div>
+                    <Message success>Success!</Message>
+                    <Message>Check your email for a link to reset your password.</Message>
+                </div>
+            ):(
+                <div>
+                    {errorMsg && <Message error>{errorMsg}</Message>}
+                    <Message>Enter your email and we'll send you a link.</Message>
 
-                <input className="w-full p-2 mb-6 text-black border-b-2 border-black outline-none bg-indigo-100" 
-                    type="text" 
-                    name="email" 
-                    value={email} 
-                    placeholder="email@gmail.com"
-                    onChange={e => setEmail(e.target.value)} 
-                />
-            </div>
-        )}
+                    <InputField 
+                        type="text" 
+                        name="email" 
+                        value={email} 
+                        placeholder="email@gmail.com"
+                        onChange={e => setEmail(e.target.value)} 
+                    />
 
-            <button 
-                disabled={!email} 
-                onClick={onResetClicked} 
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 mb-6 rounded" 
-            >
-                Send Link
-            </button>
+                    <BigButton
+                        disabled={!email} 
+                        onClick={onResetClicked} 
+                    >
+                        Send Link
+                    </BigButton>
 
-            <button
-                className="text-indigo-800 hover:text-black text-sm float-left duration-300" 
-                onClick={()=>navigate('/login')}
-                >
-                    Log In
-            </button>
-            <button 
-                className="text-indigo-800 hover:text-black text-sm float-right duration-300" 
-                onClick={()=> navigate('/signup')}
-                >
-                    Create New Account</button>    
-    
-        
-    </div>
-    </div>
+                </div>
+            )}
+  
+        </LoginContainer>
     )
 }

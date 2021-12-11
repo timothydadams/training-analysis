@@ -43,7 +43,6 @@ export const Dashboard = () => {
         navigate('/score-checker');
     }
     
-    // And here we have the JSX for our component. It's pretty straightforward
     return (
         <div className="flex flex-col h-screen">
             <div className="max-w-2xl w-full m-auto bg-indigo-100 rounded-md p-5">

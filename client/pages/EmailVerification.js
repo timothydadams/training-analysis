@@ -3,20 +3,19 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useToken } from '../auth/useToken';
-//import tw, { styled } from 'twin.macro'
+import { InputField, BigButton, SmallTextButton } from '../components/FormComponents';
+import { Title, LoginContainer, Message } from '../components/LoginComponents';
 
-//const PrimaryButton = tw.button`bg-blue-800 text-white px-6 py-2 m-6 rounded-md hover:bg-blue-600`; 
 
 const EmailVerificationSuccess = () => {
     const navigate = useNavigate();
     return (
         <div>
-            <h1 className="text-center text-xl font-bold mb-2">Success!</h1>
-            <p className="mb-4">Thanks for verifying your email, all features are now available.</p>
-            <button 
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 mb-6 rounded"
-                onClick={() => navigate('/user')} >Continue</button>
-                
+            <Title>Success!</Title>
+            <Message>Thanks for verifying your email, all features are now available.</Message>
+            <BigButton onClick={() => navigate('/')} >
+                Continue
+            </BigButton>    
         </div>
     )
 }
@@ -26,11 +25,11 @@ const EmailVerificationFail = () => {
     const navigate = useNavigate();
     return (
         <div>
-            <h1 className="text-center text-xl font-bold mb-2">Uh oh...</h1>
-            <p className="mb-4">Something went wrong.</p>
-            <button 
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 mb-6 rounded"
-                onClick={() => navigate('/signup')} >Back to Sign Up</button>
+            <Title>Uh oh...</Title>
+            <Message>Something went wrong.</Message>
+            <BigButton onClick={() => navigate('/signup')} >
+                Back to Sign Up
+            </BigButton>
         </div>
     )
 }
@@ -62,15 +61,13 @@ export const EmailVerificationLandingPage = () => {
 
 
     return (
-        <div className="flex flex-col h-screen">
-            <div className="max-w-xs w-full m-auto bg-indigo-100 rounded-md p-5">
+        <LoginContainer>
             {isLoading 
-            ? (<p>Loading</p>)
-            : !isSuccess 
-                ? <EmailVerificationFail />
-                : <EmailVerificationSuccess />
+                ? (<Message>Loading</Message>)
+                : !isSuccess 
+                    ? <EmailVerificationFail />
+                    : <EmailVerificationSuccess />
             }
-            </div>
-        </div>
+        </LoginContainer>
     )
 }

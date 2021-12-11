@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { ApiCheck } from '../components/ApiCheck';
-
+import { InputWithLabel, BigButton, SmallTextButton } from '../components/FormComponents';
+import { Title, LoginContainer, Message } from '../components/LoginComponents';
 
 
 
@@ -11,33 +12,19 @@ const Success = () => {
 
     return (
         <div>
-            <p className="text-center font-bold mb-2 text-green-600">Your password has been reset!</p>
-            <p>Please login with your new password.</p>
-            <button 
-                onClick={() => navigate('/login')}
-                className="w-full bg-indigo-600 disabled:opacity-50 hover:bg-indigo-700 text-white font-bold py-2 px-4 mb-6 rounded"
-                >
-                    Return To Login
-            </button>
+            <Message success>Your password has been reset!</Message>
+            <Message>Please login with your new password.</Message>
+            <BigButton onClick={() => navigate('/login')}>
+                Return To Login
+            </BigButton>
         </div>
     )
 }
 
-const Fail = () => {
-    const navigate = useNavigate();
-    return (
-        <div>
-            <p className="text-red-400">Something went wrong while resetting your password...</p>
-            <p className="mb-4">Change your password below</p>
-            <button 
-                onClick={() => navigate('/login')}
-                className="w-full bg-indigo-600 disabled:opacity-50 hover:bg-indigo-700 text-white font-bold py-2 px-4 mb-6 rounded"
-                >
-                    Return To Login
-            </button>
-        </div>
-    )
-}
+const Fail = () => (
+    <Message error>Something went wrong while resetting your password...</Message>
+)
+
 
 export const ResetPasswordLandingPage = () => {
     const [isFail, setIsFail] = useState(false);
@@ -59,52 +46,43 @@ export const ResetPasswordLandingPage = () => {
 
 
     return (
-    <div className="flex flex-col h-screen">
-        <div className="max-w-lg w-full m-auto bg-indigo-100 rounded-md p-5">   
+        <LoginContainer>
             <ApiCheck />
 
+            {isSuccess ? (
+                <Success />
+            ) : (
+                <div>
+                    <Message>Please update your password</Message>
 
-        {isSuccess ? (
-            <Success />
-        ) : isFail ? (
-            <Fail />
-        ) : (
-            <div>
-            <p className="mb-4">Please update your password</p>
-            <label className="block mb-2 text-black" htmlFor="password">New Password</label>
-            <input className="w-full p-2 mb-6 text-black border-b-2 border-black outline-none bg-indigo-100"
-                type="password"
-                name="password"
-                value={password}
-                placeholder="password"
-                onChange={e => setPassword(e.target.value)} />
+                    { isFail && <Fail />}
 
+                    <InputWithLabel label="New Password"
+                        type="password"
+                        name="password"
+                        value={password}
+                        placeholder="password"
+                        onChange={e => setPassword(e.target.value)} />
 
-
-            <label className="block mb-2 text-black" htmlFor="verifyPW">Re-type Password</label>
-            <input className="w-full p-2 mb-6 text-black border-b-2 border-black outline-none bg-indigo-100"
-                type="password"
-                name="verifyPW"
-                value={verifyPassword}
-                placeholder="confirm password"
-                onChange={e => setVerifyPassword(e.target.value)} />
+                    <InputWithLabel label="Confirm Password"
+                        type="password"
+                        name="verifyPW"
+                        value={verifyPassword}
+                        placeholder="confirm password"
+                        onChange={e => setVerifyPassword(e.target.value)} />
 
 
-            <button 
-                disabled={
-                    !password || !verifyPassword ||
-                    password !== verifyPassword
-                }
-                onClick={onResetPassword}
-                className="w-full bg-indigo-600 disabled:opacity-50 hover:bg-indigo-700 text-white font-bold py-2 px-4 mb-6 rounded"
-                >
-                    Reset Password
-            </button>
-            </div>
-        )}  
+                    <BigButton
+                        disabled={
+                            !password || !verifyPassword ||
+                            password !== verifyPassword
+                        }
+                        onClick={onResetPassword}>
+                            Reset Password
+                    </BigButton>
+                </div>
+            )}  
     
-        
-    </div>
-    </div>
+        </LoginContainer>
     )
 }

@@ -4,7 +4,8 @@ import { useToken } from '../auth/useToken';
 import { useUser } from '../auth/useUser';
 import { ApiCheck } from '../components/ApiCheck';
 import axios from 'axios';
-
+import { InputWithLabel, BigButton, SmallTextButton } from '../components/FormComponents';
+import { Title, LoginContainer, Message } from '../components/LoginComponents';
 
 export const AcftPage = () => {
     const user = useUser();
@@ -79,65 +80,55 @@ export const AcftPage = () => {
 
     return (
         <div className="flex flex-col h-screen">
-            <div className="max-w-md w-full m-auto bg-indigo-100 rounded-md p-5">   
+            <div className="max-w-2xl w-full m-auto bg-indigo-100 rounded-md p-5">   
                 <ApiCheck />
 
-            <p className="text-center text-xl font-bold mb-2">Check Your ACFT Score</p>
-            {response && <div >{JSON.stringify(response.data)}</div>}
+            <Title>Check Your ACFT Score</Title>
+            {response && <Message success>{JSON.stringify(response.data)}</Message>}
 
-            <label className="block mb-2 text-black" htmlFor="email">3-Rep Max Deadlift (MDL)</label>
-            <input className="w-full p-2 mb-6 text-black border-b-2 border-black outline-none bg-indigo-100"
-                 type="text"
-                 name="mdl"
+            <InputWithLabel label="3-Rep Max Deadlift (MDL)"
+                type="text"
+                name="mdl"
                 value={mdl} 
                 placeholder="340"
                 onChange={e => setMdl(e.target.value)} />
 
-
-            <label className="block mb-2 text-black" htmlFor="password">Standing Power Throw (SPT)</label>
-            <input className="w-full p-2 mb-6 text-black border-b-2 border-black outline-none bg-indigo-100"
+            <InputWithLabel label="Standing Power Throw (SPT)"
                 type="text"
                 name="spt"
                 value={spt}
                 placeholder="10.2"
                 onChange={e => setSpt(e.target.value)} />
 
-            <label className="block mb-2 text-black" htmlFor="password">Hand Release Push-ups (HRP)</label>
-            <input className="w-full p-2 mb-6 text-black border-b-2 border-black outline-none bg-indigo-100"
+            <InputWithLabel label="Hand Release Push-ups (HRP)"
                 type="text"
                 name="hrp"
                 value={hrp}
                 placeholder="44"
                 onChange={e => setHrp(e.target.value)} />
 
-            <label className="block mb-2 text-black" htmlFor="password">Sprint-Drag-Carry (SDC)</label>
-            <input className="w-full p-2 mb-6 text-black border-b-2 border-black outline-none bg-indigo-100"
+            <InputWithLabel label="Sprint-Drag-Carry (SDC)"
                 type="text"
                 name="sdc"
                 value={sdc}
                 placeholder="3:00"
                 onChange={e => setSdc(e.target.value)} />
 
-            <label className="block mb-2 text-black" htmlFor="password">Leg Tuck (LTK)</label>
-            <input className="w-full p-2 mb-6 text-black border-b-2 border-black outline-none bg-indigo-100"
+            <InputWithLabel label="Leg Tuck (LTK)"
                 type="text"
                 name="ltk"
                 value={ltk}
                 placeholder="15"
                 onChange={e => setLtk(e.target.value)} />
 
-
-            <label className="block mb-2 text-black" htmlFor="password">Plank (PLK)</label>
-            <input className="w-full p-2 mb-6 text-black border-b-2 border-black outline-none bg-indigo-100"
+            <InputWithLabel label="Plank (PLK)"
                 type="text"
                 name="plk"
                 value={plk}
                 placeholder="3:15"
                 onChange={e => setPlk(e.target.value)} />   
 
-
-            <label className="block mb-2 text-black" htmlFor="password">Two-Mile Run (2MR)</label>
-            <input className="w-full p-2 mb-6 text-black border-b-2 border-black outline-none bg-indigo-100"
+            <InputWithLabel label="Two-Mile Run (2MR)"
                 type="text"
                 name="run"
                 value={run}
@@ -145,37 +136,26 @@ export const AcftPage = () => {
                 onChange={e => setRun(e.target.value)} />
 
 
-
-
-
-            <button 
+            <BigButton onClick={onCheckScore}
                 disabled={
                     !mdl || !spt || !hrp || 
                     (!run || (run && !run.includes(':'))) || 
                     (!sdc || (sdc && !sdc.includes(':'))) ||
                     !((!plk && ltk) || (!ltk && plk && plk.includes(':')))
-                }
-                onClick={onCheckScore}
-                className="w-full bg-indigo-600 disabled:opacity-50 hover:bg-indigo-700 text-white font-bold py-2 px-4 mb-6 rounded"
-                >
-                    Check Score
-            </button>
+                } 
+            >
+                Check Score
+            </BigButton>
 
 
 
-            <button 
-                onClick={resetValues}
-                className="w-full bg-indigo-300 hover:bg-indigo-500 text-white font-bold py-2 px-4 mb-6 rounded"
-                >
-                    Reset Values
-            </button>
+            <SmallTextButton left onClick={resetValues}>
+                Reset Values
+            </SmallTextButton>
             
-            <button 
-                onClick={onLogOut}
-                className="w-full bg-indigo-300 hover:bg-indigo-500 text-white font-bold py-2 px-4 mb-6 rounded"
-                >
-                    Log Out
-            </button>
+            <SmallTextButton right onClick={onLogOut}>
+                Log Out
+            </SmallTextButton>
 
 
 

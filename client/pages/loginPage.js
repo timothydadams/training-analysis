@@ -28,7 +28,7 @@ export const LoginPage = () => {
 
     return (
         <div className="flex flex-col h-screen">
-        <div className="max-w-xs w-full m-auto bg-indigo-100 rounded-md p-5">   
+        <div className="max-w-lg w-full m-auto bg-indigo-100 rounded-md p-5">   
        <ApiCheck />
         {/*<header>
              <img className="w-20 mx-auto mb-5" src="https://img.icons8.com/fluent/344/year-of-tiger.png" /> 
@@ -71,7 +71,7 @@ export const LoginPage = () => {
         
             <button
                 className="text-indigo-800 hover:text-black text-sm float-left duration-300" 
-                onClick={()=>{}}
+                onClick={()=>navigate('/forgot-password')}
                 >
                     Reset Password?
             </button>

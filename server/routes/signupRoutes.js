@@ -43,7 +43,7 @@ const signupRoute = {
                 subject: 'Please verify your email',
                 text: `
                     Thanks for signing up!  To verify your email, please click here: 
-                    http://localhost:3000/verify-email/${verificationString}
+                    ${process.env.APP_BASE_URL}/verify-email/${verificationString}
                 `,
             });
         } catch (e) {

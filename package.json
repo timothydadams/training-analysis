@@ -7,8 +7,8 @@
     "react-build": "webpack --mode production",
     "react-dev": "webpack --mode development",
     "server-build": "babel ./server -d lib",
-    "server-dev": "npm run server-build && nodemon -r dotenv/config ./lib",
-    "server-serve": "npm run server-build && node -r dotenv/config ./lib",
+    "server-dev": "npm run server-build && nodemon -r dotenv/config lib",
+    "server-serve": "npm run server-build && node -r dotenv/config lib",
     "server-test": "npm run server-build && mocha --require @babel/register"
   },
   "author": "",

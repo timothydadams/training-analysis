@@ -4,22 +4,11 @@ import { AppRoutes } from './Routes';
 //style={{ backgroundImage: `url(${bg})` }}
 
 export const App = () => {
-    return (
-        <div className="h-screen bg-gradient-to-b from-electric to-ribbon"> 
-            <div className="bg-cover" >
-
-             
-          
-                 <AppRoutes />
-             
-                 
-           
-            </div>
-     </div>
-    )
-}
-
-
-
-
-
+  return (
+    <div className='h-screen bg-gradient-to-b from-electric to-ribbon'>
+      <div className='bg-cover'>
+        <AppRoutes />
+      </div>
+    </div>
+  );
+};

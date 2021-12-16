@@ -1,10 +1,15 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { useUser } from './useUser';  
+import { useUser } from './useUser';
+import { Dashboard } from '../pages/DashboardWrapper';
 
-export const AuthRequired = ({children}) => {
-    const user = useUser();
-    const location = useLocation();
+export const AuthRequired = ({ children }) => {
+  const user = useUser();
+  const location = useLocation();
 
-    return user ? {...children} : <Navigate to="/login" state={{path:location.pathname}}/> ;
-}
+  return user ? (
+    <Dashboard>{children}</Dashboard>
+  ) : (
+    <Navigate to='/login' state={{ path: location.pathname }} />
+  );
+};

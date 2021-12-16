@@ -1,23 +1,23 @@
 const colors = require('tailwindcss/colors');
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  purge: {
-    enabled: true,
-    content: ['./client/**/*.{js,jsx,ts,tsx}', './public/index.html'],
-  },
-  darkMode: false, // or 'media' or 'class'
+  content: ['./client/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+      },
       colors: {
         sky: colors.sky,
         cyan: colors.cyan,
-        electric: "#db00ff",
-        ribbon: "#0047ff",
-      }
+        electric: '#db00ff',
+        ribbon: '#0047ff',
+      },
     },
   },
-  variants: {
-    opacity: ({ after }) => after(['disabled'])
-  },
-  plugins: [],
-}
+  //variants: {
+  //  opacity: ({ after }) => after(['disabled'])
+  //},
+  plugins: [require('@tailwindcss/forms')],
+};

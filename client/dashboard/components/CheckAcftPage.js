@@ -12,7 +12,18 @@ import {
   SmallTextButtonDark,
 } from '../../utils/FormComponents';
 import { Title, LoginContainer, Message } from '../../utils/LoginComponents';
-import DataTable from 'react-data-table-component';
+import DataTable, { createTheme } from 'react-data-table-component';
+
+// createTheme creates a new theme named solarized that overrides the build in dark theme
+createTheme(
+  'customDark',
+  {
+    background: {
+      default: 'rgb(55,65,81)',
+    },
+  },
+  'dark'
+);
 
 const columns = [
   {
@@ -127,7 +138,12 @@ export const AcftPage = () => {
   return (
     <div tw='grid grid-flow-row grid-cols-3 gap-4 p-4'>
       <div tw='col-span-2'>
-        <DataTable theme='dark' columns={columns} data={scoreData} />
+        <DataTable
+          theme='dark'
+          columns={columns}
+          data={scoreData}
+          theme='customDark'
+        />
       </div>
 
       <div className='max-w-xs float-right bg-gray-700 rounded p-2 text-white'>

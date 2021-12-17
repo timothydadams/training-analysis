@@ -1,21 +1,4 @@
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-
-import { Logo } from '../components/logo';
+import { Logo } from '../../utils/logo';
 import React, { Fragment, useState } from 'react';
 import { Dialog, Menu, Transition } from '@headlessui/react';
 import {
@@ -222,7 +205,7 @@ export const Dashboard = ({ children }) => {
                     </div>
                     <input
                       id='search-field'
-                      className='block bg-gray-800 w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-400 placeholder-gray-400 focus:outline-none focus:bg-white focus:placeholder-gray-500 focus:text-gray-600 focus:ring-0 focus:border-transparent sm:text-sm'
+                      className='block bg-gray-800 w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-400 placeholder-gray-400 focus:outline-none focus:bg-white focus:placeholder-gray-500 focus:text-gray-600 focus:ring-0 focus:fill-white focus:border-transparent sm:text-sm'
                       placeholder='Search'
                       type='search'
                       name='search'

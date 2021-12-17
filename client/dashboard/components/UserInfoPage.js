@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useToken } from '../auth/useToken';
-import { useUser } from '../auth/useUser';
+import { useToken } from '../../auth/useToken';
+import { useUser } from '../../auth/useUser';
 import axios from 'axios';
 import {
   InputWithLabel,
   BigButton,
   SmallTextButton,
-} from '../components/FormComponents';
-import { Title, LoginContainer, Message } from '../components/LoginComponents';
+} from '../../utils/FormComponents';
+import { Title, LoginContainer, Message } from '../../utils/LoginComponents';
 
 export const UserInfoPage = () => {
   const user = useUser();

@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useToken } from '../auth/useToken';
-import { useUser } from '../auth/useUser';
-import { ApiCheck } from '../components/ApiCheck';
+import { useToken } from '../../auth/useToken';
+import { useUser } from '../../auth/useUser';
+import { ApiCheck } from '../../utils/ApiCheck';
 import axios from 'axios';
 import {
   InputWithLabel,
+  InputWithLabelDark,
   BigButton,
   SmallTextButton,
-} from '../components/FormComponents';
-import { Title, LoginContainer, Message } from '../components/LoginComponents';
+  SmallTextButtonDark,
+} from '../../utils/FormComponents';
+import { Title, LoginContainer, Message } from '../../utils/LoginComponents';
 
 export const AcftPage = () => {
   const user = useUser();
@@ -86,13 +88,13 @@ export const AcftPage = () => {
   };
 
   return (
-    <div className='max-w-xs float-right bg-white rounded m-4 p-2'>
+    <div className='max-w-xs float-right bg-gray-700 rounded m-4 p-2 text-white'>
       <ApiCheck />
 
       <Title>Check Your ACFT Score</Title>
       {response && <Message success>{JSON.stringify(response.data)}</Message>}
 
-      <InputWithLabel
+      <InputWithLabelDark
         label='3-Rep Max Deadlift (MDL)'
         type='text'
         name='mdl'
@@ -101,7 +103,7 @@ export const AcftPage = () => {
         onChange={(e) => setMdl(e.target.value)}
       />
 
-      <InputWithLabel
+      <InputWithLabelDark
         label='Standing Power Throw (SPT)'
         type='text'
         name='spt'
@@ -110,7 +112,7 @@ export const AcftPage = () => {
         onChange={(e) => setSpt(e.target.value)}
       />
 
-      <InputWithLabel
+      <InputWithLabelDark
         label='Hand Release Push-ups (HRP)'
         type='number'
         name='hrp'
@@ -119,7 +121,7 @@ export const AcftPage = () => {
         onChange={(e) => setHrp(e.target.value)}
       />
 
-      <InputWithLabel
+      <InputWithLabelDark
         label='Sprint-Drag-Carry (SDC)'
         type='text'
         name='sdc'
@@ -128,7 +130,7 @@ export const AcftPage = () => {
         onChange={(e) => setSdc(e.target.value)}
       />
 
-      <InputWithLabel
+      <InputWithLabelDark
         label='Leg Tuck (LTK)'
         type='text'
         name='ltk'
@@ -137,7 +139,7 @@ export const AcftPage = () => {
         onChange={(e) => setLtk(e.target.value)}
       />
 
-      <InputWithLabel
+      <InputWithLabelDark
         label='Plank (PLK)'
         type='text'
         name='plk'
@@ -146,7 +148,7 @@ export const AcftPage = () => {
         onChange={(e) => setPlk(e.target.value)}
       />
 
-      <InputWithLabel
+      <InputWithLabelDark
         label='Two-Mile Run (2MR)'
         type='text'
         name='run'
@@ -164,16 +166,28 @@ export const AcftPage = () => {
           !run ||
           (run && !run.includes(':')) ||
           !sdc ||
-          (sdc && !sdc.includes(':')) ||
-          !((!plk && ltk) || (!ltk && plk && plk.includes(':')))
+          (sdc &&
+            !(
+              sdc.split(':').length == 2 &&
+              sdc.split(':')[0].length == 1 &&
+              sdc.split(':')[1].length == 2
+            )) ||
+          !(
+            (!plk && ltk) ||
+            (!ltk &&
+              plk &&
+              plk.split(':').length == 2 &&
+              plk.split(':')[0].length == 1 &&
+              plk.split(':')[1].length == 2)
+          )
         }
       >
         Check Score
       </BigButton>
 
-      <SmallTextButton left onClick={resetValues}>
+      <SmallTextButtonDark left onClick={resetValues}>
         Reset Values
-      </SmallTextButton>
+      </SmallTextButtonDark>
     </div>
   );
 };

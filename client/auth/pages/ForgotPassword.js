@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { ApiCheck } from '../components/ApiCheck';
+import { ApiCheck } from '../../utils/ApiCheck';
 import {
   InputWithLabel,
   BigButton,
   SmallTextButton,
-} from '../components/FormComponents';
-import { Title, LoginContainer, Message } from '../components/LoginComponents';
+} from '../../utils/FormComponents';
+import { Title, LoginContainer, Message } from '../../utils/LoginComponents';
 
 export const ForgotPasswordPage = () => {
   const [errorMsg, setErrorMsg] = useState('');

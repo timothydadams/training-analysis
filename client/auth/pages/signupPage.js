@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useToken } from '../auth/useToken';
+import { useToken } from '../useToken';
 import axios from 'axios';
-import { ApiCheck } from '../components/ApiCheck';
+import { ApiCheck } from '../../utils/ApiCheck';
 import {
   InputWithLabel,
   BigButton,
   SmallTextButton,
-} from '../components/FormComponents';
-import { Title, LoginContainer, Message } from '../components/LoginComponents';
+} from '../../utils/FormComponents';
+import { Title, LoginContainer, Message } from '../../utils/LoginComponents';
 
 export const SignupPage = () => {
   const [token, setToken] = useToken();

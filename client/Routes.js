@@ -1,15 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { UserInfoPage } from './pages/UserInfoPage';
-import { LoginPage } from './pages/loginPage';
-import { SignupPage } from './pages/signupPage';
-import { VerifyEmail } from './pages/VerifyEmail';
-import { ForgotPasswordPage } from './pages/ForgotPassword';
-import { EmailVerificationLandingPage } from './pages/EmailVerification';
+import { UserInfoPage } from './dashboard/components/UserInfoPage';
+import { LoginPage } from './auth/pages/loginPage';
+import { SignupPage } from './auth/pages/signupPage';
+import { VerifyEmail } from './auth/pages/VerifyEmail';
+import { ForgotPasswordPage } from './auth/pages/ForgotPassword';
+import { EmailVerificationLandingPage } from './auth/pages/EmailVerification';
 import { AuthRequired } from './auth/AuthRequired';
-import { AcftPage } from './pages/CheckAcftPage';
-import { Home } from './pages/DashboardHome';
-import { ResetPasswordLandingPage } from './pages/ResetPasswordLandingPage';
+import { AcftPage } from './dashboard/components/CheckAcftPage';
+import { Home } from './dashboard/components/Home';
+import { ResetPasswordLandingPage } from './auth/pages/ResetPasswordLandingPage';
 
 export const AppRoutes = () => {
   return (

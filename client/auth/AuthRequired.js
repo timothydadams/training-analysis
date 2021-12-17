@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useUser } from './useUser';
-import { Dashboard } from '../pages/DashboardWrapper';
+import { Dashboard } from '../dashboard/pages/DashboardWrapper';
 
 export const AuthRequired = ({ children }) => {
   const user = useUser();
